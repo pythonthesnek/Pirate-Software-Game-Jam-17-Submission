@@ -6,8 +6,6 @@ const SPRINT_SPEED = 10.0
 const JUMP_VELOCITY = 4.8
 const SENSITIVITY = 0.004
 
-var direction
-
 #bob variables
 const BOB_FREQ = 2.4
 const BOB_AMP = 0.08
