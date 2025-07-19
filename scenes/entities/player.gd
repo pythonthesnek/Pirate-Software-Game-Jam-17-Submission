@@ -6,6 +6,8 @@ const SPRINT_SPEED = 10.0
 const JUMP_VELOCITY = 4.8
 const SENSITIVITY = 0.004
 
+var direction
+
 #bob variables
 const BOB_FREQ = 2.4
 const BOB_AMP = 0.08
@@ -20,6 +22,7 @@ var gravity = 9.8
 
 # Signals
 signal player_hit
+var dead: bool = false
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
@@ -42,7 +45,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor() and dead == false:
 		velocity.y = JUMP_VELOCITY
 	
 	
@@ -54,8 +57,8 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if is_on_floor():
+	direction = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if is_on_floor() and dead == false:
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -76,6 +79,7 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	move_and_slide()
+	
 
 
 func _headbob(time) -> Vector3:
@@ -90,5 +94,5 @@ func hit():
 
 
 func _on_player_hit() -> void:
-	camera.y = 0
-	camera.rotation = deg_to_rad(15)
+	head.global_position.y = -10
+	camera.rotation.z = deg_to_rad(15)

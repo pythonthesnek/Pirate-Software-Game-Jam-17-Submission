@@ -40,5 +40,5 @@ func _process(delta: float) -> void:
 
 	#print(animated_sprite.get_frame())
 	
-	if animated_sprite.get_frame() == 4 and global_position.distance_to(player.global_position) > ATTACK_RANGE:
+	if animated_sprite.get_frame() == 4:
 		player.hit()
