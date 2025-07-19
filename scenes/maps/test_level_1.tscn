@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cya1gbmocoogd"]
+[gd_scene load_steps=9 format=3 uid="uid://cya1gbmocoogd"]
 
 [ext_resource type="PackedScene" uid="uid://b5m0jbd8kjwbr" path="res://scenes/entities/player.tscn" id="1_yfv42"]
+[ext_resource type="PackedScene" uid="uid://crsvy1tc031xw" path="res://scenes/entities/demon.tscn" id="2_4xyvm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pwihf"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -13,6 +14,7 @@ sky_material = SubResource("ProceduralSkyMaterial_pwihf")
 background_mode = 2
 sky = SubResource("Sky_6hyye")
 tonemap_mode = 2
+fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wxmh"]
 albedo_color = Color(0.274062, 0.547691, 3.85046e-07, 1)
@@ -35,7 +37,7 @@ environment = SubResource("Environment_gx8es")
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34834, 0, -1.32016)
 use_collision = true
-size = Vector3(25, 0.1, 25)
+size = Vector3(100, 0.1, 50)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4698, 0.348713, 6.53793)
@@ -69,3 +71,8 @@ material = SubResource("StandardMaterial3D_6hyye")
 
 [node name="Player" parent="." instance=ExtResource("1_yfv42")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.519955, 0)
+
+[node name="Demon" parent="." instance=ExtResource("2_4xyvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58061, 1.41312, 0)
+
+[editable path="Player"]
